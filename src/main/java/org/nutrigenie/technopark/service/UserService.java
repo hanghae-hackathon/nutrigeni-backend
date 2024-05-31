@@ -22,6 +22,8 @@ public interface UserService {
 
     long logOut(long id);
 
+    String refreshTokenCheck(String refreshToken);
 
+    String accessTokenReissuance(User user);
 
 }

@@ -17,4 +17,10 @@ public class UserDTO {
         private long id;
     }
 
+    @Getter @Setter
+    public static class TokenReissuance{
+        private String email;
+        private String currentRefreshToken;
+    }
+
 }

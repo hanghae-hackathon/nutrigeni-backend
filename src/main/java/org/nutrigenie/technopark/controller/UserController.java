@@ -67,5 +67,25 @@ public class UserController {
         return userService.logOut(logOutDTO.getId());
     }
 
+    @Operation(summary = "Access Token 재발급 API")
+    @PostMapping("/token/reissuance")
+    public String tokenReissuance(@RequestBody UserDTO.TokenReissuance paramUser){
+
+        User user = userService.findUserByEmail(paramUser.getEmail());
+
+        if(user.getCurrentRefreshToken().equals(paramUser.getCurrentRefreshToken())){
+
+            String tokenStatus = userService.refreshTokenCheck(paramUser.getCurrentRefreshToken());
+            if(tokenStatus.equals("R Success")){
+                return userService.accessTokenReissuance(user);
+            }else{
+                return tokenStatus;
+            }
+        }else{
+            return "ERR_T_100"; //DB에 있는 refreshToken 값이랑 파라미터 refreshToken 값이랑 불일치
+        }
+
+    }
+
 
 }

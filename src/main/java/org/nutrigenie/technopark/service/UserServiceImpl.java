@@ -87,4 +87,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.logOut(id);
     }
 
+    @Override
+    public String refreshTokenCheck(String refreshToken) {
+
+        String tokenStatus = jwtTokenProvider.validateToken(refreshToken);
+        return "R " + tokenStatus;
+    }
+
+    @Override
+    public String accessTokenReissuance(User user) {
+        return jwtTokenProvider.accessTokenReissuance(user);
+    }
+
+
 }
