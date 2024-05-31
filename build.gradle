@@ -7,7 +7,7 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.6'
+    id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.1.5'
 }
 
@@ -34,20 +34,30 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.2.1'
 
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.1.5'
 
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
-    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
-    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
-    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    // queryDSL 설정
+    implementation "com.querydsl:querydsl-jpa"
+    implementation "com.querydsl:querydsl-core"
+    implementation "com.querydsl:querydsl-collections"
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api" // java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응 코드
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드
 
 }
 
@@ -55,20 +65,20 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-// [3] Querydsl 설정부
+// Querydsl 설정부
 def generated = 'src/main/generated'
 
-// [4] querydsl QClass 파일 생성 위치를 지정
+// querydsl QClass 파일 생성 위치를 지정
 tasks.withType(JavaCompile) {
     options.getGeneratedSourceOutputDirectory().set(file(generated))
 }
 
-// [5] java source set 에 querydsl QClass 위치 추가
+// java source set 에 querydsl QClass 위치 추가
 sourceSets {
     main.java.srcDirs += [ generated ]
 }
 
-// [6] gradle clean 시에 QClass 디렉토리 삭제
+// gradle clean 시에 QClass 디렉토리 삭제
 clean {
     delete file(generated)
 }
