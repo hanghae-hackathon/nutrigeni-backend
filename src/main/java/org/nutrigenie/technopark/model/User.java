@@ -43,4 +43,13 @@ public class User {
     @Column(name = "authority_level")
     private int authorityLevel;
 
+    @Column(name = "height")
+    private double height;
+
+    @Column(name = "weight")
+    private double weight;
+
+    @Column(name = "medical_conditions")
+    private String medicalConditions;
+
 }
