@@ -30,4 +30,12 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
                 .execute();
     }
 
+    @Override
+    public long logOut(long id) {
+        return queryFactory.update(QUser.user)
+                .set(QUser.user.currentRefreshToken, (String) null)
+                .where(QUser.user.id.eq(id))
+                .execute();
+    }
+
 }

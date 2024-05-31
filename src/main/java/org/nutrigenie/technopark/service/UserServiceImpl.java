@@ -82,4 +82,9 @@ public class UserServiceImpl implements UserService {
         return 1;
     }
 
+    @Override
+    public long logOut(long id) {
+        return userRepository.logOut(id);
+    }
+
 }

@@ -12,4 +12,9 @@ public class UserDTO {
         private String password;
     }
 
+    @Getter @Setter
+    public static class LogOut{
+        private long id;
+    }
+
 }

@@ -19,4 +19,9 @@ public interface UserService {
     TokenInfoDTO login(UserDTO.Login loginDTO);
 
     int updateRefreshToken(User user);
+
+    long logOut(long id);
+
+
+
 }

@@ -61,6 +61,11 @@ public class UserController {
 
     }
 
+    @Operation(summary = "로그아웃 API")
+    @PostMapping("/logout")
+    public long logOut(@RequestBody UserDTO.LogOut logOutDTO){
+        return userService.logOut(logOutDTO.getId());
+    }
 
 
 }
