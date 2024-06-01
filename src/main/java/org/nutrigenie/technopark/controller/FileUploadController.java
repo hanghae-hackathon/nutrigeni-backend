@@ -38,8 +38,7 @@ public class FileUploadController {
     @Value("${pythonExportPath}")
     public String pythonExportPath;
 
-    @Value("${openaiKey}")
-    public String openaiKey;
+    public String openaiKey = null;
 
     private final UploadFoodService uploadFoodService;
 
