@@ -38,4 +38,14 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom{
                 .execute();
     }
 
+    @Override
+    public String findMedicalConditions(String email) {
+
+        return queryFactory.select(QUser.user.medicalConditions)
+                .from(QUser.user)
+                .where(QUser.user.email.eq(email))
+                .fetchOne();
+    }
+
+
 }

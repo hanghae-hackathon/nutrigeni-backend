@@ -9,7 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table
+@Table(name = "user_tb")
 @Getter
 @Setter
 @ToString
@@ -51,5 +51,7 @@ public class User {
 
     @Column(name = "medical_conditions")
     private String medicalConditions;
+
+
 
 }

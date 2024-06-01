@@ -6,6 +6,7 @@ import org.nutrigenie.technopark.dto.TokenInfoDTO;
 import org.nutrigenie.technopark.dto.UserDTO;
 import org.nutrigenie.technopark.model.User;
 import org.nutrigenie.technopark.repository.UserRepository;
+import org.nutrigenie.technopark.repository.UserRepositoryCustom;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -97,6 +98,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String accessTokenReissuance(User user) {
         return jwtTokenProvider.accessTokenReissuance(user);
+    }
+
+    @Override
+    public String findMedicalConditions(String email) {
+        return userRepository.findMedicalConditions(email);
     }
 
 

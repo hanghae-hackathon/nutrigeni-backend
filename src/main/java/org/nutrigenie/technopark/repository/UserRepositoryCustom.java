@@ -13,4 +13,5 @@ public interface UserRepositoryCustom {
 
     long logOut(long id);
 
+    String findMedicalConditions(String email);
 }

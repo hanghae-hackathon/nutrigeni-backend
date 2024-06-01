@@ -26,4 +26,5 @@ public interface UserService {
 
     String accessTokenReissuance(User user);
 
+    String findMedicalConditions(String email);
 }
